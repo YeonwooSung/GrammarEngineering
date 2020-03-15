@@ -1,0 +1,88 @@
+S -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH[SUBCAT=when] Aux[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH[SUBCAT=when] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
+#------------------------------TODO---------------------------------------------
+#S -> WH[SUBCAT=when] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+#------------------------------TODO---------------------------------------------
+
+
+SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
+NP[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p]
+NP[NUM=?n, PER=?p] -> Noun[NUM=?n, PER=?p]
+NP[NUM=?n, PER=?p] -> DET Noun[NUM=?n, PER=?p]
+NP[NUM=?n, PER=?p] -> ADJP[NUM=?n, PER=?p] Noun[NUM=?n, PER=?p]
+NP[NUM=?n, PER=?p] -> NP[NUM=?n, PER=?p] PP[NUM=?n, PER=?p]
+NP[NUM='pl', PER=3, TENSE = 'pres'] -> ProperNoun[NUM=?n, PER=?p] CONJ ProperNoun[NUM=?n, PER=?p]
+
+
+
+VP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> VP[SUBCAT=[HEAD=?arg, TAIL=?rest, TENSE=?t, NUM=?n, PER=?p]] ARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
+VP[SUBCAT=?args, NUM=?n, TENSE = ?t, PER=?p] -> V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p]
+VP[SUBCAT=?args, NUM=?n, TENSE = ?t, PER=?p] -> V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p] NPARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
+VP[SUBCAT=?rest, NUM=?n, TENSE = ?t, PER=?p] -> ADV VP[SUBCAT=[HEAD=?arg, TAIL=?rest], TENSE=?t, NUM=?n, PER=?p]
+
+
+ADJ -> ADJ
+ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ 
+ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ ADJ
+ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> ADJ ARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
+ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> ADJ
+
+PP[NUM=?n, TENSE=?t, PER=?p] -> PREP[NUM=?n, TENSE=?t, PER=?p] NP[NUM=?n, PER=?p]
+
+ARG[CAT=adjunct, HEAD=[NUM=?n, PER=?p, TENSE = ?t]] -> ADJP[SUBCAT=[HEAD=[NUM=?n, PER=?p, TENSE=?t]]] 
+ARG[CAT=pp, NUM=?n, PER=?p, TENSE = ?t] -> PP[NUM=?n, PER=?p, TENSE = ?t]
+ARG[CAT=v, NUM=?n, PER=?p, TENSE = ?t] -> V[NUM=?n, PER=?p, TENSE = ?t]
+ARG[CAT=np, NUM=?n, PER=?p] -> NP[NUM = ?n, PER=?p]
+
+# i.e. Wallace seldom feeds Gromit cheese  =>  "Gromit cheese"
+NPARG[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p] Noun[NUM=?n, PER=?p]
+NPARG[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p] DET Noun[NUM=?n, PER=?p]
+
+
+V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'feeds'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'feeds'
+V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl, PER=3]] -> 'feed'
+V[SUBCAT= [HEAD=np, TAIL=nil, PER=3]] -> 'fed'
+
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'puts'
+V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'eats'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'eats'
+V[SUBCAT= [HEAD=np, TAIL= nil, TENSE = pres, NUM='pl', PER=3]] -> 'eat'
+V[SUBCAT= [HEAD=np, TAIL=nil, PER=3]] -> 'ate'
+
+V[SUBCAT= [HEAD=np, TAIL=[HEAD=v, TAIL = [HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]], PER=3]] -> 'thinks'
+
+V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl, PER=3]] -> 'drink'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'drinks'
+
+V[FORM=pres, NUM=sing, SUBCAT=nil] -> 'barks'
+V[FORM=past, SUBCAT=nil] -> 'barked'
+
+
+PREP -> 'in'
+PREP -> 'with'
+PREP -> 'after'
+
+DET[NUM='sg'] -> 'a'
+DET -> 'the'
+
+ADJ -> 'tasty'
+ADJ -> 'soft'
+
+ADV -> 'often'
+ADV -> 'seldom'
+
+ProperNoun[NUM='sg', PER = 3] -> 'Wallace'
+ProperNoun[NUM='sg', PER = 3] -> 'Gromit'
+
+Noun -> 'dinner'
+Noun -> 'cheese'
+Noun -> 'water'
+Noun -> 'kitchen'
+
+Aux[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
+CONJ -> 'and'
+WH[SUBCAT=when] -> 'when'
