@@ -2,12 +2,17 @@ S -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 S -> WH[SUBCAT=when] Aux[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 S -> WH[SUBCAT=when] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
-#------------------------------TODO---------------------------------------------
-#S -> WH[SUBCAT=when] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-#------------------------------TODO---------------------------------------------
+S -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] CONJ_S[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
 
+# subsentence
+# i.e. "Wallace feeds Gromit" in "when Gromit barks Wallace feeds Gromit"
+SUBS[SUBCAT=?rest, NUM?=n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p]
 SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
+# conjunction of sentence
+# i.e. "Gromit eats cheese and drinks water"
+CONJ_S[SUBCAT=?rest, NUM?=n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=[HEAD=?arg, TAIL=?rest, TENSE=?t, NUM=?n, PER=?p]] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] CONJ VP[SUBCAT=[HEAD=?arg, TAIL=?rest, TENSE=?t, NUM=?n, PER=?p]] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]]
 
 NP[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p]
 NP[NUM=?n, PER=?p] -> Noun[NUM=?n, PER=?p]
