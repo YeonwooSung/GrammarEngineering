@@ -15,7 +15,11 @@ S -> WH Aux[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 # i.e. "Wallace feeds Gromit" in "when Gromit barks Wallace feeds Gromit"
 SUBS[SUBCAT=?rest, NUM?=n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p]
 SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP VP NP
+# i.e. "what does Wallace feed Gromit"
+SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] NP
+# i.e. "what does Wallace think Gromit drinks"
+SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
 
 # conjunction of sentence
 # i.e. "Gromit eats cheese and drinks water"
