@@ -1,14 +1,21 @@
 S -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-S -> WH[SUBCAT=when] Aux[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-S -> WH[SUBCAT=when] NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-
+S -> WH Aux[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH Aux[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 S -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] CONJ_S[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
+# i.e. Wallace likes feeding Gromit cheese
+S -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p] NPARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
+# i.e. what does Wallace feed Gromit
+S -> WH Aux[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+
 
 
 # subsentence
 # i.e. "Wallace feeds Gromit" in "when Gromit barks Wallace feeds Gromit"
 SUBS[SUBCAT=?rest, NUM?=n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p]
 SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+SUBS[SUBCAT=?rest, NUM=?n, PER=?p] -> NP VP NP
 
 # conjunction of sentence
 # i.e. "Gromit eats cheese and drinks water"
@@ -27,7 +34,11 @@ VP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> VP[SUBCAT=[HEAD=?arg, TAIL=?rest
 VP[SUBCAT=?args, NUM=?n, TENSE = ?t, PER=?p] -> V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p]
 VP[SUBCAT=?args, NUM=?n, TENSE = ?t, PER=?p] -> V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p] NPARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
 VP[SUBCAT=?rest, NUM=?n, TENSE = ?t, PER=?p] -> ADV VP[SUBCAT=[HEAD=?arg, TAIL=?rest], TENSE=?t, NUM=?n, PER=?p]
+VP[SUBCAT=?rest, NUM=?n] -> MOD_P VP[TENSE=?t, SUBCAT=[HEAD=?arg, TAIL=?rest]] ARG[CAT=?arg]
+VP[SUBCAT=?rest, NUM=?n] -> MOD_P VP[TENSE=?t, SUBCAT=[HEAD=?arg, TAIL=?rest]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
+# i.e. may have
+MOD_P -> MOD AUX[NUM=pl] |  MOD ADV AUX[NUM=pl]
 
 ADJ -> ADJ
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ 
@@ -47,41 +58,41 @@ NPARG[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p] Noun[NUM=?n, PER=?p]
 NPARG[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p] DET Noun[NUM=?n, PER=?p]
 
 
-V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'feeds'
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'feeds'
-V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl, PER=3]] -> 'feed'
-V[SUBCAT= [HEAD=np, TAIL=nil, PER=3]] -> 'fed'
 
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'puts'
-V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'eats'
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'eats'
-V[SUBCAT= [HEAD=np, TAIL= nil, TENSE = pres, NUM='pl', PER=3]] -> 'eat'
-V[SUBCAT= [HEAD=np, TAIL=nil, PER=3]] -> 'ate'
-
+# verb present
+V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'feeds' | 'eats' | 'likes'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'feeds' | 'drinks'
+V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl]] -> 'feed' | 'eat' | 'drink' | 'think'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'puts' | 'eats'
+V[FORM=pres, NUM=sing, SUBCAT=nil] -> 'barks'
 V[SUBCAT= [HEAD=np, TAIL=[HEAD=v, TAIL = [HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]], PER=3]] -> 'thinks'
 
-V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl, PER=3]] -> 'drink'
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'drinks'
-
-V[FORM=pres, NUM=sing, SUBCAT=nil] -> 'barks'
+# verb - past
+V[SUBCAT= [HEAD=np, TAIL=nil, PER=3]] -> 'fed' | 'ate'
 V[FORM=past, SUBCAT=nil] -> 'barked'
 
+# verb - present continue
+V[TENSE=prescon, FORM=prespart , SUBCAT=[HEAD=np,TAIL=nil]] -> 'feeding'
+V[TENSE=prescon, FORM=prespart , SUBCAT=[HEAD=pp,TAIL=nil]] -> 'feeding'
 
-PREP -> 'in'
-PREP -> 'with'
-PREP -> 'after'
+# verb - past participle
+V[TENSE=pastpart, SUBCAT=[HEAD=np,TAIL=nil]] -> 'eaten' | 'seen'
+
+
+# modal
+MOD -> 'may'
+
+# prepositions
+PREP -> 'in' | 'with' | 'after'
 
 DET[NUM='sg'] -> 'a'
 DET -> 'the'
 
-ADJ -> 'tasty'
-ADJ -> 'soft'
+# Adjectives and Adverbs
+ADJ -> 'tasty' | 'soft'
+ADV -> 'often' | 'seldom' | 'not'
 
-ADV -> 'often'
-ADV -> 'seldom'
-
-ProperNoun[NUM='sg', PER = 3] -> 'Wallace'
-ProperNoun[NUM='sg', PER = 3] -> 'Gromit'
+ProperNoun[NUM='sg', PER = 3] -> 'Wallace' | 'Gromit'
 
 Noun -> 'dinner'
 Noun -> 'cheese'
@@ -89,5 +100,7 @@ Noun -> 'water'
 Noun -> 'kitchen'
 
 Aux[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
+AUX[NUM=pl] -> 'have'
+
 CONJ -> 'and'
-WH[SUBCAT=when] -> 'when'
+WH -> 'when' | 'what' | 'whom'
