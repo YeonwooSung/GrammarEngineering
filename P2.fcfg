@@ -44,11 +44,14 @@ VP[SUBCAT=?rest, NUM=?n] -> MOD_P VP[TENSE=?t, SUBCAT=[HEAD=?arg, TAIL=?rest]] S
 # i.e. may have
 MOD_P -> MOD AUX[NUM=pl] |  MOD ADV AUX[NUM=pl]
 
-ADJ -> ADJ
+
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ 
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ ADJ
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> ADJ ARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> ADJ
+# recursive -> to allow sentences with three or more adjectives in front of a noun
+ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> ADJP[NUM=?n, PER=?p] ADJ
+
 
 PP[NUM=?n, TENSE=?t, PER=?p] -> PREP[NUM=?n, TENSE=?t, PER=?p] NP[NUM=?n, PER=?p]
 
@@ -96,15 +99,16 @@ DET -> 'the'
 ADJ -> 'tasty' | 'soft'
 ADV -> 'often' | 'seldom' | 'not'
 
+# Nouns
 ProperNoun[NUM='sg', PER = 3] -> 'Wallace' | 'Gromit'
+Noun -> 'dinner' | 'cheese' | 'water' | 'kitchen'
 
-Noun -> 'dinner'
-Noun -> 'cheese'
-Noun -> 'water'
-Noun -> 'kitchen'
-
+# Auxiliary verbs
 AUX[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
 AUX[NUM=pl] -> 'have'
 
+# Conjuction
 CONJ -> 'and'
+
+# Special adverbs like 'when', 'what', 'whom'
 WH -> 'when' | 'what' | 'whom'
