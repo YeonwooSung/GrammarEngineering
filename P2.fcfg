@@ -1,13 +1,13 @@
 S -> NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-S -> WH Aux[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH AUX[NUM=?n, PER=?p] NP[NUM=?n, PER=?p] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 S -> WH NP[SUBCAT=[HEAD=[NUM=?n, PER=?p]]] VP[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
-S -> WH Aux[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH AUX[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 S -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] CONJ_S[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
 # i.e. Wallace likes feeding Gromit cheese
 S -> SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]] V[SUBCAT=?args, TENSE = ?t, NUM=?n, PER=?p] NPARG[CAT=?arg, NUM=?n, PER=?p, TENSE=?t]
 # i.e. what does Wallace feed Gromit
-S -> WH Aux[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
+S -> WH AUX[NUM=?n, PER=?p] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
 
 
@@ -103,7 +103,7 @@ Noun -> 'cheese'
 Noun -> 'water'
 Noun -> 'kitchen'
 
-Aux[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
+AUX[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
 AUX[NUM=pl] -> 'have'
 
 CONJ -> 'and'
