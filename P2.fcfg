@@ -30,7 +30,7 @@ NP[NUM=?n, PER=?p] -> Noun[NUM=?n, PER=?p]
 NP[NUM=?n, PER=?p] -> DET Noun[NUM=?n, PER=?p]
 NP[NUM=?n, PER=?p] -> ADJP[NUM=?n, PER=?p] Noun[NUM=?n, PER=?p]
 NP[NUM=?n, PER=?p] -> NP[NUM=?n, PER=?p] PP[NUM=?n, PER=?p]
-NP[NUM='pl', PER=3, TENSE = 'pres'] -> ProperNoun[NUM=?n, PER=?p] CONJ ProperNoun[NUM=?n, PER=?p]
+NP[NUM='pl', PER=3, TENSE = pres] -> ProperNoun[NUM=?n, PER=?p] CONJ ProperNoun[NUM=?n, PER=?p]
 
 
 
@@ -42,7 +42,7 @@ VP[SUBCAT=?rest, NUM=?n] -> MOD_P VP[TENSE=?t, SUBCAT=[HEAD=?arg, TAIL=?rest]] A
 VP[SUBCAT=?rest, NUM=?n] -> MOD_P VP[TENSE=?t, SUBCAT=[HEAD=?arg, TAIL=?rest]] SUBS[SUBCAT=nil, HEAD=[NUM=?n, PER=?p]]
 
 # i.e. may have
-MOD_P -> MOD AUX[NUM=pl] |  MOD ADV AUX[NUM=pl]
+MOD_P -> MOD AUX[NUM='pl'] |  MOD ADV AUX[NUM='pl']
 
 
 ADJP[SUBCAT=?rest, TENSE = ?t, NUM=?n, PER=?p] -> DET[NUM=?n] ADJ 
@@ -68,9 +68,9 @@ NPARG[NUM=?n, PER=?p] -> ProperNoun[NUM=?n, PER=?p] DET Noun[NUM=?n, PER=?p]
 
 # verb present
 V[SUBCAT= [HEAD=np, TAIL=[HEAD=pp, TAIL = nil], PER=3]] -> 'feeds' | 'eats' | 'likes'
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM=sg, PER=3]] -> 'feeds' | 'drinks'
-V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM=pl]] -> 'feed' | 'eat' | 'drink' | 'think'
-V[SUBCAT= [HEAD=np, TAIL=nil, TENSE='pres', NUM='sg', PER=3]] -> 'puts' | 'eats'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM='sg', PER=3]] -> 'feeds' | 'drinks'
+V[SUBCAT= [HEAD=np, TAIL= nil, TENSE=pres, NUM='pl']] -> 'feed' | 'eat' | 'drink' | 'think'
+V[SUBCAT= [HEAD=np, TAIL=nil, TENSE=pres, NUM='sg', PER=3]] -> 'puts' | 'eats'
 V[FORM=pres, NUM=sing, SUBCAT=nil] -> 'barks'
 V[SUBCAT= [HEAD=np, TAIL=[HEAD=v, TAIL = [HEAD=np, TAIL=[HEAD=pp, TAIL=nil]]], PER=3]] -> 'thinks'
 
@@ -105,7 +105,7 @@ Noun -> 'dinner' | 'cheese' | 'water' | 'kitchen'
 
 # Auxiliary verbs
 AUX[SUBCAT=aux, NUM = 'sg', PER = 3] -> 'does'
-AUX[NUM=pl] -> 'have'
+AUX[NUM='pl'] -> 'have'
 
 # Conjuction
 CONJ -> 'and'
