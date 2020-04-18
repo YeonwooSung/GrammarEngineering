@@ -1,3 +1,4 @@
+import sys
 import nltk
 from nltk import FeatureChartParser
 
@@ -35,7 +36,13 @@ def parse_file(name, mode=1):
 		parse_text_to_find_neg_sents(text)
 
 
-print("================ Positive examples ================")
-parse_file('P2.pos', 2)
-print("================ Negative examples ================")
-parse_file('P2.neg')
+if __name__ == '__main__':
+	pos_type = 1
+
+	if len(sys.argv) >= 2:
+		pos_type = sys.argv[1]
+
+	print("================ Positive examples ================")
+	parse_file('P2.pos', pos_type)
+	print("================ Negative examples ================")
+	parse_file('P2.neg')
